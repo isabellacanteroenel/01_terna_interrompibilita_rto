@@ -17,22 +17,19 @@ class LoginBot:
         self.driver.get(self.url)
         print(f"Página carregada: {self.driver.title}")
 
-    def login():
-        user_element = driver.find_element(By.NAME, "userName")
-        pass_element = driver.find_element(By.NAME, "password")
+    def login(self):
+        user_element = self.driver.find_element(By.NAME, "userName")
+        pass_element = self.driver.find_element(By.NAME, "password")
 
-        user_element.send_keys(username)
-        pass_element.send_keys(password)
+        user_element.send_keys(self.username)
+        pass_element.send_keys(self.password)
 
         login_button = self.driver.find_element(By.CLASS_NAME, "cal_butt")
         login_button.click()
         print("Login enviado.")
-        return driver
 
     def close_browser(self):
         self.driver.quit()
-
-
 
 if __name__ == "__main__":
     bot = LoginBot(
@@ -43,4 +40,3 @@ if __name__ == "__main__":
 
     bot.open_page()
     bot.login()
-    # bot.close_browser() 
