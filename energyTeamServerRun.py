@@ -1,7 +1,8 @@
 from extract_data import get_energy_team_server
 from login import LoginBot
 from selenium.webdriver.common.by import By
-import time
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 names_list = get_energy_team_server()
@@ -16,14 +17,18 @@ bot.open_page()
 bot.login()
 driver = bot.driver
 
+wait = WebDriverWait(driver, 10)
 
 for name in names_list:
     try:
         print(f"Trying to click on: {name}")
-        link = driver.find_element(By.NAME, name)
-        link.click()
-        time.sleep(2)
+        elements = wait.until(EC.presence_of_all_elements_located(
+    (By.TAG_NAME, "a")
+))
+        elements.click()
+
 
     except Exception as e:
         print(f"Could not click on '{name}': {e}")
         break
+
